@@ -1,0 +1,865 @@
+/* ==========================================================================
+   Metalúrgica Chascomús — Estilos generales
+   Estilo: industrial contemporáneo, sobrio y premium.
+   Paleta basada en el logo real: grafito oscuro, gris acero, blanco cálido
+   y rojo intenso como único color de acento.
+   ========================================================================== */
+
+:root {
+  /* Paleta basada en el logo (sampleada de assets/images/logo/) */
+  --color-bg: #f6f2eb;
+  --color-bg-alt: #ece4d6;
+  --color-graphite: #38373a;
+  --color-dark: #221f20;
+  --color-steel: #706b68;
+  --color-steel-light: #a6a09b;
+  --color-white: #fdfbf7;
+  --color-accent: #c1272d;
+  --color-accent-dark: #8a1c20;
+
+  --color-text: #2a2723;
+  --color-text-light: #f6f2eb;
+
+  --font-body: "Barlow", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-heading: "Barlow Condensed", "Barlow", "Segoe UI", Arial, sans-serif;
+
+  --max-width: 1180px;
+  --radius: 10px;
+  --radius-sm: 8px;
+
+  --shadow-subtle: 0 4px 16px rgba(34, 31, 32, 0.07);
+  --shadow-lift: 0 10px 26px rgba(34, 31, 32, 0.12);
+
+  --transition: 0.2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0s;
+  }
+}
+
+/* ---------- Reset básico ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+p {
+  max-width: 62ch;
+}
+
+section {
+  scroll-margin-top: 72px;
+}
+
+/* ---------- Animación de aparición al scrollear ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  box-shadow: var(--shadow-subtle);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn--whatsapp-outline {
+  background-color: transparent;
+  color: var(--color-text-light);
+  border-color: rgba(246, 242, 235, 0.3);
+  padding: 0.5rem 1.3rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+.btn--whatsapp-outline:hover,
+.btn--whatsapp-outline:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   Encabezado
+   ========================================================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-graphite);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.header__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.5rem;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header__logo-img {
+  height: 40px;
+  width: auto;
+  border-radius: 4px;
+}
+
+.header__logo-text {
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.nav__list {
+  display: flex;
+  gap: 1.8rem;
+}
+
+.nav__link {
+  color: var(--color-steel-light);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.05rem;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.header__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header__toggle-bar {
+  display: block;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   Sección Inicio (Hero)
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-graphite);
+  color: var(--color-text-light);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(193, 39, 45, 0.06) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(90deg, rgba(193, 39, 45, 0.06) 0 1px, transparent 1px 72px);
+  pointer-events: none;
+}
+
+.hero__container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 6rem 1.5rem;
+}
+
+.hero__accent-bar {
+  display: block;
+  width: 4px;
+  height: 46px;
+  background-color: var(--color-accent);
+  margin-bottom: 1.2rem;
+  border-radius: 2px;
+}
+
+.hero__title {
+  font-size: 3.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  margin-bottom: 1.1rem;
+}
+
+.hero__description {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: var(--color-steel-light);
+  margin-bottom: 1.8rem;
+  max-width: 42ch;
+}
+
+.hero__sub {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-steel-light);
+  margin-top: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+.hero__visual {
+  position: relative;
+  width: 100%;
+}
+
+.hero__image {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lift);
+}
+
+.hero__image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 380px;
+  background-color: rgba(246, 242, 235, 0.04);
+  border: 1px solid rgba(246, 242, 235, 0.14);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.hero__sketch {
+  width: 60%;
+  max-width: 220px;
+  color: var(--color-steel-light);
+}
+
+.hero__sketch-accent {
+  stroke: var(--color-accent);
+}
+
+.hero__sketch-accent-fill {
+  fill: var(--color-accent);
+}
+
+.hero__image-placeholder-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-steel-light);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Secciones generales
+   ========================================================================== */
+
+.section {
+  padding: 6rem 1.5rem;
+  background-color: var(--color-bg);
+}
+
+.section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section__title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 2.4rem;
+  position: relative;
+  padding-bottom: 0.7rem;
+}
+
+.section__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* ---------- Nosotros ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.about__media {
+  position: relative;
+}
+
+.about__image {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.about__image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 320px;
+  background-color: var(--color-graphite);
+  color: var(--color-steel-light);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.about__image-placeholder svg {
+  color: var(--color-steel-light);
+}
+
+.about__content p {
+  color: var(--color-text);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.about__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.about__highlights li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 0.98rem;
+}
+
+.about__highlights svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
+}
+
+/* ---------- Servicios ---------- */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.service {
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.service:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+.service__index {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-steel-light);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.7rem;
+}
+
+.service__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: rgba(193, 39, 45, 0.08);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.service__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.service__icon svg * {
+  stroke-width: 1.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.service__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.service__text {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  color: var(--color-steel);
+  margin-bottom: 1rem;
+}
+
+.service__link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  transition: color var(--transition);
+}
+
+.service__link:hover,
+.service__link:focus-visible {
+  color: var(--color-accent-dark);
+}
+
+/* ---------- Trabajos / Galería ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  gap: 1.3rem;
+}
+
+.gallery__item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.gallery__item--feature {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-out;
+}
+
+.gallery__item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery__placeholder {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-steel);
+}
+
+.gallery__tag {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  padding: 0.35rem 0.8rem;
+  background-color: rgba(34, 31, 32, 0.72);
+  color: var(--color-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+/* ---------- Zona de trabajo ---------- */
+.zone__text {
+  max-width: 70ch;
+  font-size: 1.08rem;
+  color: var(--color-text);
+}
+
+/* ---------- Contacto ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.contact__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(34, 31, 32, 0.1);
+  font-size: 1rem;
+}
+
+.contact__list svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
+  margin-top: 0.15rem;
+}
+
+.contact__panel {
+  background-color: var(--color-graphite);
+  color: var(--color-text-light);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact__panel-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.contact__hours-list li {
+  padding: 0.2rem 0;
+  color: var(--color-steel-light);
+}
+
+.contact__cta {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+}
+
+/* ==========================================================================
+   Pie de página
+   ========================================================================== */
+
+.footer {
+  background-color: var(--color-dark);
+  color: var(--color-steel-light);
+  padding: 3.5rem 1.5rem 2.2rem;
+}
+
+.footer__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  text-align: center;
+}
+
+.footer__brand {
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.3rem;
+}
+
+.footer__nav a:hover,
+.footer__nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+.footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.3rem;
+  font-size: 0.9rem;
+}
+
+.footer__contact a:hover,
+.footer__contact a:focus-visible {
+  color: var(--color-accent);
+}
+
+.footer__hours {
+  font-size: 0.85rem;
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: var(--color-steel);
+  margin-top: 0.8rem;
+}
+
+/* ==========================================================================
+   Botón flotante de WhatsApp
+   ========================================================================== */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  box-shadow: var(--shadow-lift);
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.whatsapp-float svg {
+  width: 26px;
+  height: 26px;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+  background-color: var(--color-accent-dark);
+  transform: scale(1.06);
+}
+
+/* ==========================================================================
+   Responsive — Tablets
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hero__container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__title {
+    font-size: 2.3rem;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+  }
+
+  .gallery__item--feature {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Responsive — Celulares
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .header__toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-graphite);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition);
+  }
+
+  .nav.is-open {
+    max-height: 420px;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .nav__list li {
+    border-bottom: 1px solid rgba(246, 242, 235, 0.08);
+  }
+
+  .nav__link {
+    display: block;
+    padding: 0.9rem 0;
+    font-size: 1rem;
+  }
+
+  .nav__whatsapp {
+    margin: 1rem 1.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero__container {
+    padding: 3.5rem 1.2rem;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 3.5rem 1.2rem;
+  }
+
+  .section__title {
+    font-size: 1.7rem;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 240px;
+  }
+
+  .gallery__item--feature {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .footer__nav,
+  .footer__contact {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
