@@ -502,34 +502,18 @@ section {
   background-color: var(--color-accent);
 }
 
-/* ---------- Enlace secundario con flecha ---------- */
-.link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.6rem;
-  font-weight: 600;
-  font-size: 0.95rem;
+/* ---------- Botón outline para fondos claros ---------- */
+.btn--outline {
+  background-color: transparent;
   color: var(--color-dark);
-  border-bottom: 1.5px solid transparent;
-  padding-bottom: 0.15rem;
-  transition: color var(--transition), border-color var(--transition);
+  border-color: rgba(31, 31, 31, 0.2);
 }
 
-.link-arrow svg {
-  width: 17px;
-  height: 17px;
-  transition: transform var(--transition);
-}
-
-.link-arrow:hover,
-.link-arrow:focus-visible {
-  color: var(--color-accent);
+.btn--outline:hover,
+.btn--outline:focus-visible {
   border-color: var(--color-accent);
-}
-
-.link-arrow:hover svg {
-  transform: translateX(3px);
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 /* ---------- Nosotros ---------- */
@@ -580,39 +564,67 @@ section {
   margin-bottom: 1.1rem;
 }
 
+.about__stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.4rem 0 1.7rem;
+  padding: 0.9rem 1.3rem;
+  background-color: var(--color-white);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(34, 31, 32, 0.04);
+}
+
+.about__stat-number {
+  font-family: var(--font-heading);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.about__stat-label {
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  max-width: 16ch;
+  line-height: 1.3;
+}
+
 .about__highlights {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  margin: 1.8rem 0 0.4rem;
+  gap: 0.5rem;
+  margin: 1.6rem 0 0.3rem;
 }
 
 .about__highlight {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.8rem 1.1rem;
+  gap: 0.75rem;
+  padding: 0.55rem 0.85rem;
   background-color: var(--color-white);
-  border: 1px solid rgba(34, 31, 32, 0.07);
+  border: 1px solid rgba(34, 31, 32, 0.05);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-subtle);
+  box-shadow: 0 1px 4px rgba(34, 31, 32, 0.04);
   font-weight: 600;
   color: var(--color-dark);
-  font-size: 0.98rem;
-  transition: transform var(--transition), box-shadow var(--transition);
+  font-size: 0.94rem;
+  transition: border-color var(--transition);
 }
 
 .about__highlight:hover {
-  transform: translateX(3px);
-  box-shadow: var(--shadow-lift);
+  border-color: rgba(193, 39, 45, 0.25);
 }
 
 .about__highlight-icon {
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background-color: rgba(193, 39, 45, 0.1);
+  background-color: rgba(193, 39, 45, 0.08);
   color: var(--color-accent);
   display: flex;
   align-items: center;
@@ -620,8 +632,12 @@ section {
 }
 
 .about__highlight-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
+}
+
+.about__cta {
+  margin-top: 1.7rem;
 }
 
 /* ---------- Servicios ---------- */
@@ -809,10 +825,52 @@ section {
 }
 
 /* ---------- Zona de trabajo ---------- */
+.zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  padding: 2.6rem 2.8rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.zone__content {
+  max-width: 620px;
+}
+
 .zone__text {
-  max-width: 70ch;
-  font-size: 1.08rem;
-  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-steel);
+  margin: 0.9rem 0 1.7rem;
+}
+
+.zone__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.zone__highlights li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 1rem;
+}
+
+.zone__highlights svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
+}
+
+.zone__cta {
+  flex-shrink: 0;
 }
 
 /* ---------- Contacto ---------- */
@@ -1093,6 +1151,17 @@ a.contact__row-value:focus-visible {
   .contact {
     grid-template-columns: 1fr;
   }
+
+  .zone {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.2rem;
+  }
+
+  .zone__cta {
+    align-self: stretch;
+    text-align: center;
+  }
 }
 
 /* ==========================================================================
@@ -1191,6 +1260,10 @@ a.contact__row-value:focus-visible {
 
   .trabajos-cta {
     padding: 2.2rem 1.4rem;
+  }
+
+  .zone {
+    padding: 1.8rem 1.4rem;
   }
 
   .footer__nav {

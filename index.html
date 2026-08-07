@@ -162,19 +162,21 @@
 
         <div class="about__content" data-reveal>
           <span class="eyebrow">Sobre nosotros</span>
-          <h2 class="about__title">Metalúrgica local, soluciones a medida</h2>
+          <h2 class="about__title">Soluciones metalúrgicas a medida, pensadas para durar</h2>
           <p>
-            En Metalúrgica Chascomús fabricamos, instalamos y reparamos estructuras y productos
-            metálicos para hogares, comercios e industrias.
+            En Metalúrgica Chascomús transformamos tus ideas en estructuras metálicas firmes,
+            funcionales y precisas. Acompañamos a particulares, comercios e industrias desde el
+            asesoramiento inicial hasta la colocación final.
           </p>
           <p>
-            Trabajamos cada proyecto de forma personalizada, cuidando la resistencia, la
-            funcionalidad y la terminación final.
+            Evaluamos cada proyecto según el uso, la resistencia requerida y el acabado estético
+            deseado para garantizar un trabajo impecable y duradero.
           </p>
-          <p>
-            Nos encontramos en Chascomús y evaluamos trabajos en otras localidades según las
-            características de cada solicitud.
-          </p>
+
+          <div class="about__stat">
+            <span class="about__stat-number">+20</span>
+            <span class="about__stat-label">años de experiencia en la industria</span>
+          </div>
 
           <ul class="about__highlights">
             <li class="about__highlight">
@@ -183,7 +185,7 @@
                   <path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
-              Fabricación a medida
+              Atención y asesoramiento personalizado
             </li>
             <li class="about__highlight">
               <span class="about__highlight-icon" aria-hidden="true">
@@ -191,7 +193,7 @@
                   <path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
-              Instalación y reparación
+              Instalación en obra
             </li>
             <li class="about__highlight">
               <span class="about__highlight-icon" aria-hidden="true">
@@ -199,17 +201,11 @@
                   <path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
-              Chascomús y otras localidades
+              Materiales y acabados de alta resistencia
             </li>
           </ul>
 
-          <a href="#servicios" class="link-arrow">
-            Ver servicios
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
+          <a href="#servicios" class="btn btn--outline about__cta">Ver servicios →</a>
         </div>
       </div>
     </section>
@@ -442,12 +438,39 @@
     <!-- ===================== SECCIÓN ZONA DE TRABAJO ===================== -->
     <section class="section section--alt" id="zona-de-trabajo">
       <div class="section__container">
-        <h2 class="section__title">Zona de trabajo</h2>
-        <p class="zone__text">
-          Estamos ubicados en Chascomús y realizamos trabajos tanto en la ciudad como en otras
-          localidades, según el tipo y alcance de cada proyecto. Comunicate con nosotros para
-          consultar disponibilidad.
-        </p>
+        <div class="zone" data-reveal>
+          <div class="zone__content">
+            <h2 class="section__title">Zona de trabajo</h2>
+            <p class="zone__text">
+              Estamos ubicados en Chascomús y realizamos trabajos tanto en la ciudad como en
+              otras localidades, según el tipo y alcance de cada proyecto.
+            </p>
+            <ul class="zone__highlights">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                Base en Chascomús
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Consultanos disponibilidad para otras localidades
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="#"
+            class="btn btn--primary zone__cta"
+            data-whatsapp
+            data-message="Hola, quisiera consultar si realizan trabajos en mi localidad."
+          >
+            Consultar disponibilidad
+          </a>
+        </div>
       </div>
     </section>
 
