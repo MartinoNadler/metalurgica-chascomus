@@ -1011,6 +1011,11 @@ a.contact__row-value:focus-visible {
   color: var(--color-steel-light);
 }
 
+.footer__contact a:hover,
+.footer__contact a:focus-visible {
+  color: var(--color-accent);
+}
+
 .footer__placeholder {
   color: var(--color-steel);
   opacity: 0.65;

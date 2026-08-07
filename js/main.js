@@ -7,7 +7,7 @@
  * (formato internacional, sin espacios ni símbolos, ej: 549XXXXXXXXXX),
  * todos los botones de WhatsApp del sitio se actualizan automáticamente.
  */
-const WHATSAPP_NUMBER = "[COMPLETAR NÚMERO DE WHATSAPP]";
+const WHATSAPP_NUMBER = "5492241121212";
 const WHATSAPP_DEFAULT_MESSAGE =
   "Hola, quisiera solicitar información y un presupuesto para un trabajo.";
 
