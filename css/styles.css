@@ -435,7 +435,7 @@ section {
    ========================================================================== */
 
 .section {
-  padding: 6rem 1.5rem;
+  padding: 4rem 1.5rem 6rem;
   background-color: var(--color-bg);
 }
 
@@ -471,7 +471,7 @@ section {
 /* ---------- Encabezado de sección con subtítulo y bajada ---------- */
 .section-heading {
   max-width: 640px;
-  margin-bottom: 2.8rem;
+  margin-bottom: 2rem;
 }
 
 .section-heading .section__title {
@@ -533,11 +533,20 @@ section {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   gap: 3.5rem;
-  align-items: center;
+  align-items: stretch;
+}
+
+.about__media {
+  position: relative;
+  height: 100%;
 }
 
 .about__image {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: var(--radius);
   border: 1px solid rgba(34, 31, 32, 0.06);
   box-shadow: var(--shadow-lift);
@@ -1149,6 +1158,17 @@ a.contact__row-value:focus-visible {
   .about {
     grid-template-columns: 1fr;
     gap: 2.2rem;
+  }
+
+  .about__media {
+    height: auto;
+  }
+
+  .about__image {
+    position: static;
+    height: auto;
+    aspect-ratio: 5 / 6;
+    max-height: 480px;
   }
 
   .services {
