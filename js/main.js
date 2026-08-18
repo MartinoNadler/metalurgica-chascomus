@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupFooterYear();
   setupScrollReveal();
   setupScrollSpy();
+  setupGalleryToggle();
+  setupGalleryLightbox();
 });
 
 /* ---------- Enlaces de WhatsApp ---------- */
@@ -201,6 +203,126 @@ function setupScrollSpy() {
   });
 
   sections.forEach(({ target }) => observer.observe(target));
+}
+
+/* ---------- Ver más / ver menos trabajos en la galería ---------- */
+function setupGalleryToggle() {
+  const button = document.getElementById("gallery-toggle");
+  const gallery = document.querySelector(".gallery");
+  if (!button || !gallery) return;
+
+  const extraItems = gallery.querySelectorAll(".gallery__item--extra");
+
+  button.addEventListener("click", () => {
+    const isExpanded = gallery.classList.toggle("is-expanded");
+    button.setAttribute("aria-expanded", String(isExpanded));
+    button.textContent = isExpanded ? "Ver menos trabajos" : "Ver más trabajos";
+
+    if (isExpanded) {
+      // Al mostrarlas recién ahora, evita que queden esperando su propio
+      // cruce de intersección para aparecer (podrían no volver a cruzarlo).
+      extraItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      gallery.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  });
+}
+
+/* ---------- Lightbox: ampliar fotos de la galería de trabajos ---------- */
+function setupGalleryLightbox() {
+  const items = Array.from(document.querySelectorAll(".gallery__item"));
+  const lightbox = document.getElementById("lightbox");
+  if (!items.length || !lightbox) return;
+
+  const imageEl = document.getElementById("lightbox-image");
+  const captionEl = document.getElementById("lightbox-caption");
+  const closeBtn = document.getElementById("lightbox-close");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+
+  let visibleItems = [];
+  let currentIndex = 0;
+  let lastFocused = null;
+
+  items.forEach((item, index) => {
+    item.setAttribute("role", "button");
+    item.setAttribute("tabindex", "0");
+    const tag = item.querySelector(".gallery__tag");
+    if (tag) item.setAttribute("aria-label", `Ampliar foto: ${tag.textContent}`);
+
+    const open = () => openLightbox(index, item);
+    item.addEventListener("click", open);
+    item.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+
+  function getVisibleItems() {
+    return items.filter((item) => item.offsetParent !== null);
+  }
+
+  function renderCurrent() {
+    const item = visibleItems[currentIndex];
+    const img = item.querySelector("img");
+    const tag = item.querySelector(".gallery__tag");
+    imageEl.src = img.src;
+    imageEl.alt = img.alt;
+    captionEl.textContent = tag ? tag.textContent : "";
+  }
+
+  function openLightbox(startIndex, triggerEl) {
+    visibleItems = getVisibleItems();
+    currentIndex = Math.max(visibleItems.indexOf(triggerEl), 0);
+    lastFocused = document.activeElement;
+
+    renderCurrent();
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => lightbox.classList.add("is-visible"));
+    closeBtn.focus();
+
+    document.addEventListener("keydown", handleKeydown);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-visible");
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", handleKeydown);
+
+    window.setTimeout(() => {
+      lightbox.hidden = true;
+    }, 220);
+
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    renderCurrent();
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % visibleItems.length;
+    renderCurrent();
+  }
+
+  function handleKeydown(event) {
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") showPrev();
+    if (event.key === "ArrowRight") showNext();
+  }
+
+  closeBtn.addEventListener("click", closeLightbox);
+  prevBtn.addEventListener("click", showPrev);
+  nextBtn.addEventListener("click", showNext);
+
+  // Cerrar al hacer click fuera de la foto (sobre el fondo oscuro).
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
 }
 
 /* ---------- Año actual en el pie de página ---------- */
