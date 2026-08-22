@@ -40,8 +40,13 @@ function setupSmoothAnchorScroll() {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const getScrollOffset = () =>
-    window.matchMedia("(max-width: 640px)").matches ? 32 : 8;
+  // El header es "sticky": una vez pegado arriba, tapa el contenido que
+  // queda debajo. El offset debe igualar su altura real para que cada
+  // sección conserve su propio espaciado superior en vez de quedar recortada.
+  const getScrollOffset = () => {
+    const header = document.querySelector(".header");
+    return header ? header.getBoundingClientRect().height : 0;
+  };
 
   const easeInOutCubic = (t) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -235,6 +240,7 @@ function setupGalleryLightbox() {
   if (!items.length || !lightbox) return;
 
   const imageEl = document.getElementById("lightbox-image");
+  const videoEl = document.getElementById("lightbox-video");
   const captionEl = document.getElementById("lightbox-caption");
   const closeBtn = document.getElementById("lightbox-close");
   const prevBtn = document.getElementById("lightbox-prev");
@@ -248,7 +254,8 @@ function setupGalleryLightbox() {
     item.setAttribute("role", "button");
     item.setAttribute("tabindex", "0");
     const tag = item.querySelector(".gallery__tag");
-    if (tag) item.setAttribute("aria-label", `Ampliar foto: ${tag.textContent}`);
+    const isVideo = item.classList.contains("gallery__item--video");
+    if (tag) item.setAttribute("aria-label", `${isVideo ? "Ampliar video" : "Ampliar foto"}: ${tag.textContent}`);
 
     const open = () => openLightbox(index, item);
     item.addEventListener("click", open);
@@ -267,9 +274,26 @@ function setupGalleryLightbox() {
   function renderCurrent() {
     const item = visibleItems[currentIndex];
     const img = item.querySelector("img");
+    const video = item.querySelector("video");
     const tag = item.querySelector(".gallery__tag");
-    imageEl.src = img.src;
-    imageEl.alt = img.alt;
+
+    videoEl.pause();
+
+    if (video) {
+      imageEl.hidden = true;
+      videoEl.hidden = false;
+      videoEl.src = video.currentSrc || video.src;
+      videoEl.setAttribute("aria-label", video.getAttribute("aria-label") || "");
+      videoEl.play().catch(() => {});
+    } else {
+      videoEl.hidden = true;
+      videoEl.removeAttribute("src");
+      videoEl.load();
+      imageEl.hidden = false;
+      imageEl.src = img.src;
+      imageEl.alt = img.alt;
+    }
+
     captionEl.textContent = tag ? tag.textContent : "";
   }
 
@@ -291,6 +315,7 @@ function setupGalleryLightbox() {
     lightbox.classList.remove("is-visible");
     document.body.style.overflow = "";
     document.removeEventListener("keydown", handleKeydown);
+    videoEl.pause();
 
     window.setTimeout(() => {
       lightbox.hidden = true;
