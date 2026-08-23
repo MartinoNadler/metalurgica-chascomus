@@ -962,12 +962,6 @@ a.contact__row-value:focus-visible {
   color: var(--color-accent);
 }
 
-.contact__row-value--placeholder {
-  font-weight: 500;
-  color: var(--color-steel);
-  opacity: 0.7;
-}
-
 .contact__panel {
   background-color: var(--color-graphite);
   color: var(--color-text-light);
@@ -1089,11 +1083,6 @@ a.contact__row-value:focus-visible {
 .footer__contact a:hover,
 .footer__contact a:focus-visible {
   color: var(--color-accent);
-}
-
-.footer__placeholder {
-  color: var(--color-steel);
-  opacity: 0.65;
 }
 
 .footer__hours {
