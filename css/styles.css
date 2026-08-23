@@ -616,6 +616,13 @@ section {
   font-size: 0.94rem;
 }
 
+.about__highlight-stat {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
 .about__highlight-text {
   font-family: var(--font-body);
   font-size: 0.86rem;
