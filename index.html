@@ -27,7 +27,7 @@
     <div class="header__container">
       <a href="#inicio" class="header__brand" aria-label="Metalúrgica Chascomús - Inicio">
         <img
-          src="assets/images/logo/logo-metalurgica-chascomus.jpg"
+          src="assets/images/logo/logo-metalurgica-chascomus-transparente.png"
           alt="Logo de Metalúrgica Chascomús"
           class="header__logo-img"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
@@ -71,6 +71,7 @@
   <main>
 
     <!-- ===================== SECCIÓN INICIO (HERO) ===================== -->
+    <!-- Banner de fondo (assets/images/inicio/banner2.png). Reemplazar por la versión definitiva cuando esté lista. -->
     <section class="hero" id="inicio">
       <div class="hero__container">
         <div class="hero__content" data-reveal>
@@ -115,32 +116,6 @@
             </li>
           </ul>
         </div>
-
-        <div class="hero__visual" data-reveal>
-          <!-- Foto de stock temporal (no es un trabajo real de Metalúrgica Chascomús). Reemplazar por foto propia en assets/images/inicio/hero.jpg -->
-          <img
-            src="assets/images/inicio/hero.jpg"
-            alt="Imagen de referencia (foto de stock temporal) de trabajo de soldadura y herrería"
-            class="hero__image"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-          >
-          <div class="hero__image-overlay" aria-hidden="true"></div>
-          <div class="hero__image-placeholder" aria-hidden="true" style="display:none;">
-            <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero__sketch">
-              <path d="M20 190V60L110 24L200 60V190" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M20 190H200" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M46 190V80" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M72 190V70" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M148 190V70" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M174 190V80" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M110 24V190" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 6"/>
-              <path d="M72 130H148" class="hero__sketch-accent" stroke-width="2.5"/>
-              <circle cx="72" cy="130" r="3" class="hero__sketch-accent-fill"/>
-              <circle cx="148" cy="130" r="3" class="hero__sketch-accent-fill"/>
-            </svg>
-            <span class="hero__image-placeholder-label">Imagen de trabajo metalúrgico</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -148,10 +123,9 @@
     <section class="section" id="nosotros">
       <div class="section__container about">
         <div class="about__media" data-reveal>
-          <!-- Foto de stock temporal (no es una foto real del taller). Reemplazar en assets/images/nosotros/taller.jpg -->
           <img
-            src="assets/images/nosotros/taller.jpg"
-            alt="Imagen de referencia (foto de stock temporal) de un taller metalúrgico"
+            src="assets/images/nosotros/taller-real.png"
+            alt="Operario de Metalúrgica Chascomús soldando una estructura metálica en el taller"
             class="about__image"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           >
@@ -275,21 +249,20 @@
           </p>
         </div>
         <!--
-          Las 21 imágenes y 1 video de esta galería son fotos y videos reales
-          de trabajos de Metalúrgica Chascomús. Las primeras 6 fotos se ven
-          de entrada; el resto (incluido el video) usa la clase
-          "gallery__item--extra" y aparece al presionar "Ver más trabajos"
-          (ver setupGalleryToggle en js/main.js). Para sumar más fotos,
-          agregar el archivo en assets/images/trabajos/ y una nueva tarjeta
-          siguiendo el mismo formato. Para sumar más videos, agregar el
-          archivo en assets/videos/ y una tarjeta con la clase
-          "gallery__item--video" siguiendo el formato del ítem de video
-          existente.
+          Las 20 imágenes de esta galería son fotos reales de trabajos de
+          Metalúrgica Chascomús. Las primeras 6 se ven de entrada; el resto
+          usa la clase "gallery__item--extra" y aparece al presionar
+          "Ver más trabajos" (ver setupGalleryToggle en js/main.js). Para
+          sumar más fotos, agregar el archivo en assets/images/trabajos/ y
+          una nueva tarjeta siguiendo el mismo formato. Para sumar un video,
+          agregar el archivo en assets/videos/ y una tarjeta con la clase
+          "gallery__item--video" (el lightbox ya sabe reproducir video,
+          ver renderCurrent en js/main.js).
         -->
         <div class="gallery">
 
           <figure class="gallery__item" data-reveal>
-            <img src="assets/images/trabajos/instalaciones-1.png" alt="Operario de Metalúrgica Chascomús soldando una estructura de rejas en el taller" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="assets/images/trabajos/instalaciones-3.png" alt="Operario de Metalúrgica Chascomús soldando una estructura metálica en el taller" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="gallery__placeholder" style="display:none;"></div>
             <span class="gallery__tag">Instalaciones y montaje</span>
           </figure>
@@ -331,24 +304,8 @@
           </figure>
 
           <figure class="gallery__item gallery__item--extra" data-reveal>
-            <img src="assets/images/trabajos/trabajos-a-medida-1.png" alt="Operario de Metalúrgica Chascomús puliendo una reja metálica a medida en el taller" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="gallery__placeholder" style="display:none;"></div>
-            <span class="gallery__tag">Trabajos a medida</span>
-          </figure>
-
-          <figure class="gallery__item gallery__item--extra" data-reveal>
             <img src="assets/images/trabajos/portones-1.png" alt="Portón automático corredizo de rejas metálicas en frente de vivienda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="gallery__placeholder" style="display:none;"></div>
-            <span class="gallery__tag">Portones y accesos</span>
-          </figure>
-
-          <figure class="gallery__item gallery__item--video gallery__item--extra" data-reveal>
-            <video src="assets/videos/portones-1.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Portón automático de Metalúrgica Chascomús en funcionamiento" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></video>
-            <div class="gallery__placeholder" style="display:none;"></div>
-            <span class="gallery__badge">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 5.5v13l11-6.5-11-6.5Z" fill="currentColor"/></svg>
-              Video
-            </span>
             <span class="gallery__tag">Portones y accesos</span>
           </figure>
 
