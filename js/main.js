@@ -17,10 +17,78 @@ document.addEventListener("DOMContentLoaded", () => {
   setupMobileMenu();
   setupFooterYear();
   setupScrollReveal();
+  setupAOS();
+  setupCounters();
   setupScrollSpy();
   setupGalleryToggle();
+  setupGalleryFilters();
   setupGalleryLightbox();
 });
+
+/* ---------- Inicializa AOS (Animate On Scroll) para hero/proceso/nosotros ---------- */
+function setupAOS() {
+  if (typeof AOS === "undefined") return;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  AOS.init({
+    duration: 700,
+    once: true,
+    offset: 60,
+    disable: prefersReducedMotion,
+  });
+}
+
+/* ---------- Contador animado (ej. "+20" años de trayectoria) ---------- */
+function setupCounters() {
+  const counters = document.querySelectorAll("[data-count-to]");
+  if (!counters.length) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const animateCount = (el) => {
+    const target = parseInt(el.getAttribute("data-count-to"), 10) || 0;
+
+    if (prefersReducedMotion) {
+      el.textContent = target;
+      return;
+    }
+
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    counters.forEach(animateCount);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach((counter) => observer.observe(counter));
+}
 
 /* ---------- Enlaces de WhatsApp ---------- */
 function setupWhatsappLinks() {
@@ -230,6 +298,49 @@ function setupGalleryToggle() {
     } else {
       gallery.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
+  });
+}
+
+/* ---------- Filtro por categoría en la galería de trabajos ---------- */
+function setupGalleryFilters() {
+  const buttons = Array.from(document.querySelectorAll(".gallery__filter"));
+  const gallery = document.querySelector(".gallery");
+  const toggleButton = document.getElementById("gallery-toggle");
+  if (!buttons.length || !gallery) return;
+
+  const items = Array.from(gallery.querySelectorAll(".gallery__item"));
+  const hasExtraItems = items.some((item) =>
+    item.classList.contains("gallery__item--extra")
+  );
+
+  function applyFilter(filter) {
+    if (filter === "todos") {
+      // Vuelve al comportamiento por defecto: las "extra" quedan ocultas
+      // salvo que la galería ya esté expandida (ver setupGalleryToggle).
+      items.forEach((item) => {
+        item.style.display = "";
+      });
+      if (toggleButton) toggleButton.hidden = !hasExtraItems;
+    } else {
+      // Un filtro de categoría muestra todas sus fotos, incluidas las
+      // marcadas como "extra", e ignora el estado de "Ver más trabajos".
+      items.forEach((item) => {
+        item.style.display = item.dataset.category === filter ? "block" : "none";
+      });
+      if (toggleButton) toggleButton.hidden = true;
+    }
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("is-active");
+      button.setAttribute("aria-pressed", "true");
+      applyFilter(button.dataset.filter);
+    });
   });
 }
 
